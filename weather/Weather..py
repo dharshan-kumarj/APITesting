@@ -40,7 +40,6 @@ async def fetch_weather_forecast(city: str, session: aiohttp.ClientSession):
         "appid": API_KEY,
         "units": "metric"  # Use metric units for temperature
     }
-
     try:
         async with session.get(BASE_URL, params=query_params) as response:
             response.raise_for_status()  # Raise an exception for non-2xx status codes
@@ -56,6 +55,11 @@ async def fetch_weather_forecast(city: str, session: aiohttp.ClientSession):
                 wind_speed = entry["wind"]["speed"]
                 wind_direction_degrees = entry["wind"]["deg"]
                 wind_direction = get_cardinal_direction(wind_direction_degrees)
+                temp_min = entry["main"]["temp_min"]
+                temp_max = entry["main"]["temp_max"]
+                pressure = entry["main"]["pressure"]
+                cloudiness = entry["clouds"]["all"]
+                ground_level_pressure = entry["main"].get("grnd_level", "N/A")
 
                 forecast.append({
                     "date": date,
@@ -63,11 +67,15 @@ async def fetch_weather_forecast(city: str, session: aiohttp.ClientSession):
                     "description": description,
                     "humidity": humidity,
                     "wind_speed": wind_speed,
-                    "wind_direction": wind_direction
+                    "wind_direction": wind_direction,
+                    "temp_min": temp_min,
+                    "temp_max": temp_max,
+                    "pressure": pressure,
+                    "cloudiness": cloudiness,
+                    "ground_level_pressure": ground_level_pressure
                 })
 
             return forecast
-
     except aiohttp.ClientError as e:
         return {"error": str(e)}
 
