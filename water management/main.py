@@ -12,10 +12,10 @@ class WaterData(BaseModel):
     last_updated: str
 
 # Mock external API URL (replace with real API if available)
-EXTERNAL_API_URL = "https://eaas.meersens.com/api/me"
+EXTERNAL_API_URL = "https://eaas.meersens.com/api/"
 
 # Your API key for the external API
-API_KEY = ""
+API_KEY = "mxvbleFczujPK4Qhif8vP00njJdHEL0J"
 
 # Dependency to get the API key from the request header
 def get_api_key(api_key: str = Header(...)):

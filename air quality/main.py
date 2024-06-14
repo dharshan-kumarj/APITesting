@@ -3,7 +3,7 @@ import httpx
 
 app = FastAPI()
 
-API_KEY = ""  # Replace with your actual API key
+API_KEY = "22e9d54472dc3af790ba0aab12cd5781"  # Replace with your actual API key
 BASE_URL = "http://api.openweathermap.org/data/2.5/air_pollution"
 
 @app.get("/air_quality")
